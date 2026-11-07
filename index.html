@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vasúti Forgalomirányító Szimulátor</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app-container">
+
+        <div id="main-menu" class="screen active">
+            <h1>Vasúti Forgalomirányító és Váltóállomás Szimulátor</h1>
+            <div class="menu-form">
+                <label for="player-name">Játékos neve:</label>
+                <input type="text" id="player-name" placeholder="Írd be a neved...">
+
+                <label for="level-select">Nehézség:</label>
+                <select id="level-select">
+                    <option value="1">1. szint: Kitérő vágány (Könnyű)</option>
+                    <option value="2">2. szint: Rendező-pályaudvar (Közepes)</option>
+                    <option value="3">3. szint: Fejpályaudvar (Nehéz)</option>
+                </select>
+
+                <button id="btn-start">Szimuláció Indítása</button>
+                <button id="btn-load">Mentett játék betöltése</button>
+                <button id="btn-leaderboard">Dicsőséglista</button>
+            </div>
+            <div class="rules">
+                <h2>Játékszabályzat</h2>
+                <ul>
+                    <li><strong>Cél:</strong> juttasd minden vonatot a saját színének megfelelő peronra, ütközés és kisiklás nélkül, a lehető leggyorsabban.</li>
+                    <li><strong>Váltó (kék kör):</strong> bal kattintásra a következő irányba áll át, a fehér vonal mutatja az aktív ágat.</li>
+                    <li><strong>Fényjelző:</strong> bal kattintásra vált pirosra (Tilos) és zöldre (Szabad). A vonat a piros jelző előtt megáll, és a „TILOS” felirat jelenik meg rajta.</li>
+                    <li><strong>Vészfék:</strong> jobb kattintás a vonatra megállítja („FÉK”), újabb jobb kattintás elengedi.</li>
+                    <li><strong>Veszélyzóna:</strong> ha két vonat 75 képpontnál közelebb kerül egymáshoz, sárga szaggatott kör figyelmeztet. 40 képpont alatt ütközés történik, és vége a játéknak.</li>
+                    <li><strong>Hibák:</strong> a rossz peronra futás hibapont. Ha a vonat vágányvégre fut, kisiklik: hibapont és vége a játéknak.</li>
+                    <li><strong>Dicsőséglista:</strong> pályánként külön készül, a hibátlan teljesítés előzi meg a hibásat, azonos hibaszámnál a gyorsabb idő számít.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="game-screen" class="screen">
+            <div class="hud">
+                <div class="hud-item">Játékos: <span id="hud-name"></span></div>
+                <div class="hud-item">Pálya: <span id="hud-level"></span></div>
+                <div class="hud-item">Idő: <span id="hud-time">00:00</span></div>
+                <div class="hud-item">Célba ért: <span id="hud-score">0 / 0</span></div>
+                <div class="hud-item">Hiba: <span id="hud-errors">0</span></div>
+            </div>
+
+            <div class="controls">
+                <button id="btn-pause">Szünet</button>
+                <button id="btn-reset">Alaphelyzet</button>
+                <button id="btn-save">Mentés</button>
+                <button id="btn-exit">Kész (Főmenü)</button>
+            </div>
+
+            <canvas id="game-canvas" width="1024" height="600"></canvas>
+        </div>
+
+        <div id="custom-modal" class="modal hidden">
+            <div class="modal-content">
+                <h2 id="modal-title">Értesítés</h2>
+                <p id="modal-message"></p>
+                <button id="btn-modal-ok">Rendben</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script type="module" src="./js/app.js"></script>
+</body>
+</html>
